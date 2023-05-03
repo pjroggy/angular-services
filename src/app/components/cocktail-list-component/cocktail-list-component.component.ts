@@ -7,16 +7,20 @@ import { Cocktail } from 'src/app/models/cocktail.model';
   templateUrl: './cocktail-list-component.component.html',
   styleUrls: ['./cocktail-list-component.component.css']
 })
+
 export class CocktailListComponentComponent {
 
   cocktails: Cocktail[] = [];
 
-  constructor(public cocktailService: CocktailServiceService){
+  constructor(private cocktailService: CocktailServiceService) {
 
   }
 
-  ngOnInit(){
+  ngOnInit(): void {
 
-    this.cocktails = this.cocktailService.getCocktails()
+    this.cocktailService.getCocktails().subscribe(cocktailsFromJsonFile => {
+
+      this.cocktails = cocktailsFromJsonFile;
+    });
   }
 }
